@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="./vue.js"></script>
+  <title>Vue.js</title>
+</head>
+
+<body>
+  <div id="app">
+    
+    <p>latestTime: {{acoes.latestTime}}</p>
+    <p>latestPrice: {{acoes.latestPrice}}</p>
+    <p>companyName: {{acoes.companyName}}</p>
+    <button @click="puxarAcoes">Puxar Ações</button>
+  </div>
+  <!--
+  Utilizando a API
+  https://api.iextrading.com/1.0/stock/aapl/quote
+
+  Crie um método que faça o fetch da resposta acima
+  O método deve ser ativado ao clique no botão Ver Preço
+
+  Coloque a resposta json do fetch em uma data e
+  mostre o valor de latestPrice, latestTime e o
+  companyName na interface.
+-->
+  <script>
+    const vm = new Vue({
+      el: "#app",
+      data: {
+        acoes: {},
+      },
+      methods: {
+        puxarAcoes() {
+          fetch("https://api.iextrading.com/1.0/stock/nvda/quote")
+            .then(response => response.json())
+            .then(json => {
+              this.acoes = json;
+            })
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

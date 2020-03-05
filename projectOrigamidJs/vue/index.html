@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+  <div id="app" >
+  
+   <ul>
+     <li v-for="(dado, chave) in meusDados">
+      {{chave}}: {{dado}}
+     </li>
+   </ul>
+
+
+
+   <button @click="contador++">ADD</button>
+
+
+
+
+
+  </div>
+    
+  <script>
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          meusDados: {},
+          contador: 0,
+        },
+        created() {
+          fetch('https://api.github.com/users/Bsignx')
+          .then( r => r.json())
+          .then(r => {
+            this.meusDados = r;
+          })
+        },
+        updated() {
+          document.title = this.contador;
+        }
+       
+        
+      })
+
+      
+  </script>
+  
+
+</body>
+</html>
